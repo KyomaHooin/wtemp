@@ -12,10 +12,10 @@ FILE
       nokia/ - Nokia 5110 LCD code.
          rf/ - RF module code.
 
-PCD8544_SPI/ - PCD8544 driver library by ...
-       RF24/ - nRF24L01+ library by ...
-    OneWire/ - OneWire library by ...
-   LowPower/ - LowPower library by ...
+PCD8544_SPI/ - PCD8544 driver library by Arthur Liberman.
+       RF24/ - nRF24L01+ library by J. Coliz.
+    OneWire/ - OneWire library by Jim Studt, Paul Stoffregen & Co.
+   LowPower/ - LowPower library by Lim Phang Moh.
 </pre>
 
 CONTACT
