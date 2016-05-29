@@ -22,13 +22,15 @@ void setup() {
   pinMode(LCD_POWER, OUTPUT);
   digitalWrite(LCD_POWER, HIGH);
   lcd.begin(0, 0xB1, 0x04, 0x13); //Invert, Contrast, TempCoef, Bias
-  lcd.print("3.2V      3.1V");
+
+  lcd_voltage("5.6","7.8");
   lcd_font(10, pos[0]);
   lcd_font(7 , pos[1]);
   lcd_font(8 , pos[2]);
   lcd_font(11, pos[3]);
   lcd_font(9 , pos[4]);
   lcd_thermometr();
+
   lcd.renderAll();
 }
 
@@ -41,9 +43,17 @@ void lcd_font(byte i, byte x){
   memcpy_P(buff, font[i], 42);
   lcd.writeBitmap(buff, x, 2, 14, 3);
 }
-//Thermometr bitmap 2x10 PROGMEM fixed position
+//Thermometr bitmap 2x10 PROGMEM fixed
 void lcd_thermometr(){
   uint8_t buff[20];
   memcpy_P(buff, thermo, 20);
   lcd.writeBitmap(buff, 74, 2, 10, 2);
 }
+
+void lcd_voltage(String server, String client) {
+  lcd.print(server + "V");
+  lcd.gotoXY(61, 0);
+  lcd.print(client + "V");
+}
+
+
