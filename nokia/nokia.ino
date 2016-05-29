@@ -1,3 +1,5 @@
+// Nokia 5110 LCD
+//
 //#define PIN_DC 8 //data/command switch -> PCD8544_SPI_FB.h
 //#define PIN_RESET 9 //reset switch -> PCD8544_SPI_FB.h
 
@@ -10,7 +12,6 @@
 #define PIN_SCE 10// SS -> PCD8544_SPI_FB.h
 #define PIN_SDIN 11// MOSI Hardwired SPI(4Mhz)
 #define PIN_SCLK 13// SCK Hardwired SPI(4Mhz)
-
 #define USE_FRAME_BUFFER// pre-buffered LCD output
 #define LCD_POWER 2
 
@@ -64,8 +65,8 @@ void lcd_display_voltage(float server_vcc, float client_vcc) {
 
 //Display temperature digits.
 void lcd_display_temperature(float f) {
-  if (f < 0) {lcd_font(10,0); } // "Negative One" ;).. 
-  if (abs(int(f) / 10) > 0) {lcd_font(abs(int(f) / 10), 15); }
+  if (f < 0) { lcd_font(10,0); } // "Negative One" ;).. 
+  if (abs(int(f) / 10) > 0) { lcd_font(abs(int(f) / 10), 15); }
   lcd_font(abs(int(f) % 10), 30);
   lcd_font(11, 43); //Precision point.
   lcd_font(abs(int(f * 10.0) % 10), 56);
