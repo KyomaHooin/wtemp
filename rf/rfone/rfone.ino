@@ -13,8 +13,9 @@
 
 //RF24  class instance na pinech CE/CSN.
 RF24 rf(RF_CE, RF_CSN);
-//RF24 data TX pipe address:
-const uint64_t pipe = 0xE8E8F0F0E1LL;
+//RF24 data TX/RX pipe address:
+//const uint64_t rf_tx_pipe = 0xE8E8F0F0E1LL;
+byte addresses[][6] = {"1Node","2Node"};
 //RF debug
 static FILE uartout = {0};
 static int uart_putchar (char c, FILE *stream) {
@@ -25,23 +26,35 @@ static int uart_putchar (char c, FILE *stream) {
 //SETUP
 
 void setup() {
-//DEBUG setup
+  //DEBUG setup
   Serial.begin(9600);
-// fill in the UART file descriptor with pointer to writer.
+  // fill in the UART file descriptor with pointer to writer.
   fdev_setup_stream (&uartout, uart_putchar, NULL, _FDEV_SETUP_WRITE);
-// The uart is the standard output device STDOUT.
+  // The uart is the standard output device STDOUT.
   stdout = &uartout ;
-//RF SETUP
+  //RF SETUP
   //Wakeup LEVEL 1
   rf.begin();
-  //Set power level
+  //Set PA level
   rf.setPALevel(RF24_PA_LOW);
-  //Open TX pipe
-  //rf.openWritingPipe(pipe);
   //Serial.println("Geting status...");
   rf.printDetails();
+  //Open TX pipe
+//  rf.openWritingPipe(rf_tx_pipe);
+  rf.openWritingPipe(addresses[1]);
+  rf.openReadingPipe(1,addresses[0]);
+  //Open RX queue
+  rf.startListening();
 }
 
 //MAIN
 
-void loop() {}
+void loop() {
+    rf.stopListening(); 
+    unsigned long start_time = micros();
+    if (!rf.write( &start_time, sizeof(unsigned long) )){
+       Serial.println(F("failed"));
+     }        
+    // Try again 1s later
+    delay(1000);
+}
