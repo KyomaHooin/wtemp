@@ -73,3 +73,9 @@ void lcd_display_temperature(float f) {
   lcd_thermometr();
 }
 
+//Display error.
+void lcd_display_error() {
+  lcd_font(12, 56);
+  lcd_thermometr();
+}
+
