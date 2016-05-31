@@ -43,8 +43,8 @@ void loop() {
   rf.powerUp();
   rf.startListening();
   rf_timeout = millis();
-  //RF non-blocking sync(max. = sleep time) => time to sync 0-10ms
-  while(!rf.available()) { if (millis() - rf_timeout > 500 ) { break; }}
+  //RF sync(max. = sleep time) => time to sync 0-10ms
+  while(!rf.available());
   //RF get payload
   if (rf.available()){
     rf.read(&payload, sizeof(payload));
