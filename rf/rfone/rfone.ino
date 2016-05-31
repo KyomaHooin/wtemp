@@ -39,10 +39,13 @@ void setup() {
 payloadStruct payload = {3.1, 25.15};
 
 void loop() {
-  //write payload
+  //RF start
+  rf.powerUp();
+  //RF send payload 
   rf.write(&payload, sizeof(payload));
-  // Try again 1s later
-  payload.voltage++;
-  payload.temperature++;
+  //RF stop
+  rf.powerDown();
+  //sleep goes here..
   delay(5000);
 }
+
