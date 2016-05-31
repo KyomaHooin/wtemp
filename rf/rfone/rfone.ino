@@ -11,10 +11,15 @@
 #define RF_CE 8 //RX/TX mode
 #define RF_CSN 9 //SS SPI
 
-//RF24  class instance na pinech CE/CSN.
+//RF class instance
 RF24 rf(RF_CE, RF_CSN);
-//RF24 data TX/RX pipe address:
+//RF data TX/RX pipe address:
 const uint64_t rf_tx_pipe = 0xE8E8F0F0E1LL;
+//RF payload struct
+struct payloadStruct {
+  float voltage;
+  float temperature;
+};
 
 //SETUP
 
@@ -31,11 +36,13 @@ void setup() {
 
 //MAIN
 
+payloadStruct payload = {3.1, 25.15};
+
 void loop() {
-  //payload
-  float payload = 12.34;
   //write payload
-  rf.write(&payload, sizeof(float));
+  rf.write(&payload, sizeof(payload));
   // Try again 1s later
-  delay(1000);
+  payload.voltage++;
+  payload.temperature++;
+  delay(5000);
 }
