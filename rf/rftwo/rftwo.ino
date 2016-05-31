@@ -15,6 +15,11 @@
 RF24 rf(RF_CE, RF_CSN);
 //RF24 data RX/TX pipe address:
 const uint64_t rf_rx_pipe = 0xE8E8F0F0E1LL;
+//Payload struct
+struct payloadStruct {
+  float voltage;
+  float temperature;
+} payload;
 
 //SETUP
 
@@ -27,22 +32,21 @@ void setup() {
   rf.setPALevel(RF24_PA_LOW);
   //Open RX pipe
   rf.openReadingPipe(1, rf_rx_pipe);
-  //Open RX queue
-  rf.startListening();
 }
 
 //MAIN
 
 void loop() {
-  //payload
-    float payload;
-    //read payload
-    if( rf.available()){
-      while (rf.available()) {
-        rf.read(&payload, sizeof(float));
-      }
-      Serial.println(payload);
-   }
-   //Queue delay
-   delay(1000);
+  //start listening
+  rf.startListening();
+  //get payload
+  if( rf.available()){
+    while (rf.available()) {
+      rf.read(&payload, sizeof(payload));
+    }
+    Serial.println(payload.voltage);
+    Serial.println(payload.temperature);
+ } else { Serial.println("E"); }
+ //Queue delay
+ delay(5000);
 }
