@@ -15,11 +15,13 @@
 RF24 rf(RF_CE, RF_CSN);
 //RF24 data RX/TX pipe address:
 const uint64_t rf_rx_pipe = 0xE8E8F0F0E1LL;
-//Payload struct
+//RF payload struct
 struct payloadStruct {
   float voltage;
   float temperature;
 } payload;
+//RF sync delay
+unsigned long rf_timeout;
 
 //SETUP
 
@@ -37,16 +39,21 @@ void setup() {
 //MAIN
 
 void loop() {
-  //start listening
+  //RF start
+  rf.powerUp();
   rf.startListening();
-  //get payload
-  if( rf.available()){
-    while (rf.available()) {
-      rf.read(&payload, sizeof(payload));
-    }
+  rf_timeout = millis();
+  //RF non-blocking sync(max. = sleep time) => time to sync 0-10ms
+  while(!rf.available()) { if (millis() - rf_timeout > 500 ) { break; }}
+  //RF get payload
+  if (rf.available()){
+    rf.read(&payload, sizeof(payload));
     Serial.println(payload.voltage);
     Serial.println(payload.temperature);
- } else { Serial.println("E"); }
- //Queue delay
+  } else { Serial.println("E"); }
+  //RF stop
+  rf.stopListening();
+  rf.powerDown();
+ //sleep goes here..
  delay(5000);
 }
