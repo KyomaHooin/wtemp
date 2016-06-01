@@ -52,14 +52,14 @@ void loop() {
   ds_temp_request();
   //Payload
   payloadStruct payload = {float(readVcc())/1000, ds_get_temperature()};
+  //DS down
+  ds_down();
   //RF start
   rf.powerUp();
   //RF send payload 
   rf.write(&payload, sizeof(payload));
   //RF stop
   rf.powerDown();
-  //DS down
-  ds_down();
   //sleep goes here..
   sleep();
 }
@@ -78,7 +78,6 @@ void ds_temp_request() {
   ds.write(0x44);//"Convert T".
   delay(750); //12-Bit resolution delay.
 }
-
 
 //Calculate temperature.
 float ds_get_temperature() {
