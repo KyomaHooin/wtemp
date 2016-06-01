@@ -6,8 +6,9 @@ Low power wireless thermometr with LCD display.
 FILE
 
 <pre>
-        wt_client.ino - Wireless thermometr client.
-        wt_server.ino - Wireless thermometr server.
+wt_client.ino - Wireless thermometr client.
+wt_server.ino - Wireless thermometr server.
+       font.h - Font file.          
 
 PCD8544_SPI/ - PCD8544 driver library by Arthur Liberman.
        RF24/ - nRF24L01+ library by J. Coliz.
