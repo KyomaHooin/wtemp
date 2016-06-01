@@ -19,9 +19,9 @@
 #define DS_POWER 4 //OneWire power
 #define DS_DQ 6 //OneWire data
 
-//RF class instance
+//RF class instance CE/CSN pin
 RF24 rf(RF_CE, RF_CSN);
-//RF data TX/RX pipe address:
+//RF data TX pipe address
 const uint64_t rf_tx_pipe = 0xE8E8F0F0E1LL;
 //RF payload struct
 struct payloadStruct {
@@ -48,21 +48,21 @@ void setup() {
 //MAIN
 
 void loop() {
-  //DS up.
+  //DS up
   ds_up();
-  //DS request conversion.
+  //DS request conversion
   ds_temp_request();
-  //Payload.
+  //Payload
   payloadStruct payload = {float(readVcc())/1000, ds_get_temperature()};
-  //DS down.
+  //DS down
   ds_down();
-  //RF start.
+  //RF start
   rf.powerUp();
-  //RF send payload .
+  //RF send payload
   rf.write(&payload, sizeof(payload));
-  //RF stop.
+  //RF stop
   rf.powerDown();
-  //Sleep for 4s.
+  //Sleep for 4s
   sleep();
 }
 
