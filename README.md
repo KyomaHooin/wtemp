@@ -1,21 +1,18 @@
 
 DESCRIPTION
 
-Wireless "RF" thermometr with Nokia 5110 LCD display.
+Low power wireless thermometr with LCD display.
 
 FILE
 
 <pre>
-        wtc/ - Thermometr client.
-        wts/ - Thermometr server.
-     dallas/ - Dallas sensor code.
-      nokia/ - Nokia 5110 LCD code.
-         rf/ - RF module code.
+        wt_client.ino - Wireless thermometr client.
+        wt_server.ino - Wireless thermometr server.
 
 PCD8544_SPI/ - PCD8544 driver library by Arthur Liberman.
        RF24/ - nRF24L01+ library by J. Coliz.
-    OneWire/ - OneWire library by Jim Studt, Paul Stoffregen & Co.
-   LowPower/ - LowPower library by Lim Phang Moh.
+    OneWire/ - DS18B20 OneWire library by Jim Studt, Paul Stoffregen & Co.
+   LowPower/ - Low power library by Lim Phang Moh.
 </pre>
 
 CONTACT
