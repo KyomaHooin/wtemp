@@ -2,7 +2,9 @@
 /////////////////////////////////////////////////
 // Wireless thermometr client by Richard Bruna //
 /////////////////////////////////////////////////
-
+//
+//vccRead() by Scott "dky" 
+//
 //#define RF_MOSI 11 -> Hardwared MOSI SPI(10 Mhz)
 //#define RF_MISO 12 -> Hardwired MISO SPI(10 Mhz)
 //#define RF_SCK 13  -> Hardwired SCK SPI (10 Mhz)
@@ -46,21 +48,21 @@ void setup() {
 //MAIN
 
 void loop() {
-  //DS up
+  //DS up.
   ds_up();
-  //DS request conversion
+  //DS request conversion.
   ds_temp_request();
-  //Payload
+  //Payload.
   payloadStruct payload = {float(readVcc())/1000, ds_get_temperature()};
-  //DS down
+  //DS down.
   ds_down();
-  //RF start
+  //RF start.
   rf.powerUp();
-  //RF send payload 
+  //RF send payload .
   rf.write(&payload, sizeof(payload));
-  //RF stop
+  //RF stop.
   rf.powerDown();
-  //sleep goes here..
+  //Sleep for 4s.
   sleep();
 }
 
