@@ -24,7 +24,7 @@
 #define PIN_SCLK 13// LCD SCK Hardwired SPI(4Mhz)
 #define USE_FRAME_BUFFER//LCD pre-buffered LCD output
 
-//RF24  class instance na pinech CE/CSN.
+//RF24  class instance CE/CSN pin.
 RF24 rf(RF_CE, RF_CSN);
 //RF24 data RX/TX pipe address:
 const uint64_t rf_rx_pipe = 0xE8E8F0F0E1LL;
@@ -42,7 +42,7 @@ unsigned long rf_timeout;
 
 void setup() {
   //DEBUG
-  Serial.begin(9600);
+  //Serial.begin(9600);
   //RF Wakeup level(1)
   rf.begin();
   //RF PA level
@@ -66,30 +66,33 @@ void loop() {
   while(!rf.available()) {
     if (millis() - rf_timeout > 1000 ) { break; }
   };
-  //RF get payload.
+  //RF get payload
   if (rf.available()){
     rf.read(&payload, sizeof(payload));
     rf.stopListening();
     rf.powerDown();
-    //Display payload.
+    //Display payload
     lcd_display_voltage(payload.voltage, float(readVcc())/1000);
     lcd_display_temperature(payload.temperature);
     lcd.renderAll();
-    Serial.println(payload.voltage);
-    Serial.println(payload.temperature);
+    //Serial.println(payload.voltage);
+    //Serial.println(payload.temperature);
   } else {
-    //Display error.
+    //Display error
     rf.stopListening();
     rf.powerDown();
     lcd.clear();
     lcd_display_error();
     lcd.renderAll();
   }
-  //Sleep 4s.
+  //Sleep 4s
   sleep();
   delay(500); //Sleep 4000 + 500 WakeUp delay
 }
 
+//FUNC
+
+//Get VCC voltage reference.
 long readVcc() {
   // Read 1.1V reference against AVcc, set the reference to Vcc and the measurement to the internal 1.1V reference
   ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
