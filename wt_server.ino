@@ -35,7 +35,6 @@ struct payloadStruct {
 } payload;
 //create frame buffered instance
 PCD8544_SPI_FB lcd;
-
 //RF sync counter
 unsigned long rf_timeout;
 
@@ -86,7 +85,7 @@ void loop() {
     lcd_display_error();
     lcd.renderAll();
   }
-  //sleep goes here..
+  //Sleep 4s.
   sleep();
   delay(500); //Sleep 4000 + 500 WakeUp delay
 }
