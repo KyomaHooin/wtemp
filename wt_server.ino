@@ -14,7 +14,7 @@
 #include <SPI.h>
 #include <RF24.h>
 #include <PCD8544_SPI.h>
-#include </root/sketchbook/wtemp/nokia/font.h>
+#include <font.h>
 #include <LowPower.h>
 
 #define RF_CE 5 //RF RX/TX mode
