@@ -15,6 +15,7 @@ static int uart_putchar (char c, FILE *stream) {
 }
 
 void setup() {
+  Serial.begin(9600);
   fdev_setup_stream (&uartout, uart_putchar, NULL, _FDEV_SETUP_WRITE);
   stdout = &uartout;
   rf.printDetails();
