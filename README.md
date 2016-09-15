@@ -3,6 +3,24 @@ DESCRIPTION
 
 Low power wireless thermometr with LCD display.
 
+DEBUG
+
+<pre>
+//Print STDOUT to UART..
+
+static FILE uartout = {0};
+static int uart_putchar (char c, FILE *stream) {
+  Serial.write(c);
+  return 0;
+}
+
+void setup() {
+  fdev_setup_stream (&uartout, uart_putchar, NULL, _FDEV_SETUP_WRITE);
+  stdout = &uartout;
+  rf.printDetails();
+}
+</pre>
+
 FILE
 
 <pre>
