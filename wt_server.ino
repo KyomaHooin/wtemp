@@ -41,8 +41,6 @@ unsigned long rf_timeout;
 //SETUP
 
 void setup() {
-  //DEBUG
-  //Serial.begin(9600);
   //RF Wakeup level(1)
   rf.begin();
   //RF PA level
@@ -75,8 +73,6 @@ void loop() {
     lcd_display_voltage(payload.voltage, float(readVcc())/1000);
     lcd_display_temperature(payload.temperature);
     lcd.renderAll();
-    //Serial.println(payload.voltage);
-    //Serial.println(payload.temperature);
   } else {
     //Display error
     rf.stopListening();
