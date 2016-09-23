@@ -1,3 +1,4 @@
+![Wireless Thermometr](https://github.com/KyomaHooin/wtemp/raw/master/wt_screen.jpg "screenshot")
 
 DESCRIPTION
 
