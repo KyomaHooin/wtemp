@@ -26,7 +26,7 @@
 
 //RF24  class instance CE/CSN pin.
 RF24 rf(RF_CE, RF_CSN);
-//RF24 data RX/TX pipe address:
+//RF24 data RX pipe address:
 const uint64_t rf_rx_pipe = 0xE8E8F0F0E1LL;
 //RF payload struct
 struct payloadStruct {
@@ -141,7 +141,6 @@ void lcd_display_temperature(float f) {
 void lcd_display_error() {
   lcd.gotoXY(18, 2);
   lcd.print("NO DATA!");
-  //lcd_thermometr();
 }
 
 //Sleep for 4s.
