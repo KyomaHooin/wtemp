@@ -30,14 +30,13 @@ wt_client.ino - Wireless thermometr client.
 wt_server.ino - Wireless thermometr server.
        font.h - Font file.          
 
-PCD8544_SPI/ - PCD8544 driver library by Arthur Liberman.
-       RF24/ - nRF24L01+ library by J. Coliz.
-    OneWire/ - DS18B20 OneWire library by Jim Studt, Paul Stoffregen & Co.
-   LowPower/ - Low power library by Lim Phang Moh.
+PCD8544_SPI.zip - PCD8544 driver library by Arthur Liberman.
+   LowPower.zip - Low power library by Lim Phang Moh.
+    OneWire.zip - DS18B20 OneWire library by Jim Studt, Paul Stoffregen & Co.
+       RF24.zip - nRF24L01+ library by J. Coliz.
 </pre>
 
 CONTACT
 
 Author: richard_bruna@nm.cz<br>
 Source: https://github.com/KyomaHooin/wtemp
-
