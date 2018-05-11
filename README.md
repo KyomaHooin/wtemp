@@ -36,7 +36,7 @@ PCD8544_SPI.zip - PCD8544 driver library by Arthur Liberman.
        RF24.zip - nRF24L01+ library by J. Coliz.
 </pre>
 
-CONTACT
+SOURCE
 
-Source: https://github.com/KyomaHooin/wtemp
+https://github.com/KyomaHooin/wtemp
 
